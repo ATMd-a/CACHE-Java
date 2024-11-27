@@ -9,9 +9,10 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import javax.swing.UIManager;
+import javax.swing.JOptionPane;
 
 
-
+//depositbtn, sendbtn, change variables ng amount ng send, deposit, bills at radio buttons
 /**
  *
  * @author althea
@@ -79,34 +80,28 @@ public class Finals extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         pnlSend = new javax.swing.JPanel();
         jPanel27 = new javax.swing.JPanel();
-        jTextField5 = new javax.swing.JTextField();
+        txtAmount = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         cbAccountList = new javax.swing.JComboBox<>();
         jLabel43 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtNumber = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
         jPanel32 = new javax.swing.JPanel();
         btSend = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
         ckbSend = new javax.swing.JCheckBox();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtAreaSend = new javax.swing.JTextArea();
+        radS200 = new javax.swing.JRadioButton();
         jLabel27 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        radS20 = new javax.swing.JRadioButton();
+        radS50 = new javax.swing.JRadioButton();
+        radS100 = new javax.swing.JRadioButton();
+        radS500 = new javax.swing.JRadioButton();
+        radS1000 = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         pnlDeposit = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -129,18 +124,20 @@ public class Finals extends javax.swing.JFrame {
         jLabel73 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
         ckbDeposit = new javax.swing.JCheckBox();
-        jTextField11 = new javax.swing.JTextField();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
-        jRadioButton10 = new javax.swing.JRadioButton();
-        jRadioButton11 = new javax.swing.JRadioButton();
-        jRadioButton12 = new javax.swing.JRadioButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtAreaDeposit = new javax.swing.JTextArea();
+        txtAmountDepo = new javax.swing.JTextField();
+        radD1000 = new javax.swing.JRadioButton();
+        radD100 = new javax.swing.JRadioButton();
+        radD500 = new javax.swing.JRadioButton();
+        radD50 = new javax.swing.JRadioButton();
+        radD200 = new javax.swing.JRadioButton();
+        radD20 = new javax.swing.JRadioButton();
         jLabel28 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         pnlBills = new javax.swing.JPanel();
         jPanel28 = new javax.swing.JPanel();
-        jTextField3 = new javax.swing.JTextField();
+        txtAccountNo = new javax.swing.JTextField();
         jLabel75 = new javax.swing.JLabel();
         jLabel76 = new javax.swing.JLabel();
         jLabel78 = new javax.swing.JLabel();
@@ -161,8 +158,10 @@ public class Finals extends javax.swing.JFrame {
         jLabel87 = new javax.swing.JLabel();
         jLabel88 = new javax.swing.JLabel();
         ckbPaybills = new javax.swing.JCheckBox();
-        jTextField12 = new javax.swing.JTextField();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtAreaBills = new javax.swing.JTextArea();
+        txtAmountbills = new javax.swing.JTextField();
+        ckbProtectFee = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
         pnlTransaction = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -328,9 +327,17 @@ public class Finals extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Type", "Method", "Reciever", "Amount"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jLabel36.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -389,9 +396,14 @@ public class Finals extends javax.swing.JFrame {
         jPanel27.setPreferredSize(new java.awt.Dimension(670, 450));
         jPanel27.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setName(""); // NOI18N
-        jPanel27.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 240, 41));
+        txtAmount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtAmount.setName(""); // NOI18N
+        txtAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAmountActionPerformed(evt);
+            }
+        });
+        jPanel27.add(txtAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 240, 41));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Quick amount");
@@ -421,9 +433,9 @@ public class Finals extends javax.swing.JFrame {
         jLabel43.setText("Enter number");
         jPanel27.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 100, -1));
 
-        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField9.setName(""); // NOI18N
-        jPanel27.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 41));
+        txtNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNumber.setName(""); // NOI18N
+        jPanel27.add(txtNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 41));
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel42.setText("or");
@@ -438,43 +450,16 @@ public class Finals extends javax.swing.JFrame {
         btSend.setText("Send");
         btSend.setBorderPainted(false);
         btSend.setEnabled(false);
+        btSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSendActionPerformed(evt);
+            }
+        });
         jPanel32.add(btSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 193, 39));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel21.setText("Summary");
         jPanel32.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 112, -1));
-
-        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel29.setText("Saks");
-        jPanel32.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
-
-        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel30.setText("Receiver's name");
-        jPanel32.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
-
-        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel33.setText("00.00");
-        jPanel32.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
-
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel34.setText("You're about to send");
-        jPanel32.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
-
-        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel35.setText("Amount");
-        jPanel32.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-
-        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel38.setText("Total AMount to pay");
-        jPanel32.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
-
-        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel40.setText("00.00");
-        jPanel32.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
-
-        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel41.setText("00.00");
-        jPanel32.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
 
         ckbSend.setText("I confirm that the details are correct");
         ckbSend.addActionListener(new java.awt.event.ActionListener() {
@@ -484,65 +469,71 @@ public class Finals extends javax.swing.JFrame {
         });
         jPanel32.add(ckbSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
+        txtAreaSend.setColumns(20);
+        txtAreaSend.setRows(5);
+        jScrollPane3.setViewportView(txtAreaSend);
+
+        jPanel32.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 280, 170));
+
         jPanel27.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 300, 350));
 
-        buttonGroup2.add(jRadioButton1);
-        jRadioButton1.setText("200");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(radS200);
+        radS200.setText("200");
+        radS200.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                radS200ActionPerformed(evt);
             }
         });
-        jPanel27.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
+        jPanel27.add(radS200, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("Enter Amount");
         jPanel27.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 100, -1));
 
-        buttonGroup2.add(jRadioButton2);
-        jRadioButton2.setText("20");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(radS20);
+        radS20.setText("20");
+        radS20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                radS20ActionPerformed(evt);
             }
         });
-        jPanel27.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        jPanel27.add(radS20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
 
-        buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText("50");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(radS50);
+        radS50.setText("50");
+        radS50.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                radS50ActionPerformed(evt);
             }
         });
-        jPanel27.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
+        jPanel27.add(radS50, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
 
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText("100");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(radS100);
+        radS100.setText("100");
+        radS100.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
+                radS100ActionPerformed(evt);
             }
         });
-        jPanel27.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
+        jPanel27.add(radS100, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
 
-        buttonGroup2.add(jRadioButton5);
-        jRadioButton5.setText("500");
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(radS500);
+        radS500.setText("500");
+        radS500.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                radS500ActionPerformed(evt);
             }
         });
-        jPanel27.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, -1));
+        jPanel27.add(radS500, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, -1));
 
-        buttonGroup2.add(jRadioButton6);
-        jRadioButton6.setText("1000");
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(radS1000);
+        radS1000.setText("1000");
+        radS1000.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
+                radS1000ActionPerformed(evt);
             }
         });
-        jPanel27.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, -1));
+        jPanel27.add(radS1000, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, -1));
 
         pnlSend.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 700, 460));
 
@@ -605,6 +596,11 @@ public class Finals extends javax.swing.JFrame {
         btDeposit.setText("Deposit");
         btDeposit.setBorderPainted(false);
         btDeposit.setEnabled(false);
+        btDeposit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDepositActionPerformed(evt);
+            }
+        });
         jPanel35.add(btDeposit, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 193, 39));
 
         jLabel64.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -651,65 +647,71 @@ public class Finals extends javax.swing.JFrame {
         });
         jPanel35.add(ckbDeposit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
+        txtAreaDeposit.setColumns(20);
+        txtAreaDeposit.setRows(5);
+        jScrollPane4.setViewportView(txtAreaDeposit);
+
+        jPanel35.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 280, 170));
+
         jPanel11.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 300, 350));
 
-        jTextField11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField11.setName(""); // NOI18N
-        jPanel11.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 240, 41));
+        txtAmountDepo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtAmountDepo.setName(""); // NOI18N
+        jPanel11.add(txtAmountDepo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 240, 41));
 
-        buttonGroup3.add(jRadioButton7);
-        jRadioButton7.setText("1000");
-        jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup3.add(radD1000);
+        radD1000.setText("1000");
+        radD1000.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton7ActionPerformed(evt);
+                radD1000ActionPerformed(evt);
             }
         });
-        jPanel11.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, -1));
+        jPanel11.add(radD1000, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, -1));
 
-        buttonGroup3.add(jRadioButton8);
-        jRadioButton8.setText("100");
-        jRadioButton8.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup3.add(radD100);
+        radD100.setText("100");
+        radD100.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton8ActionPerformed(evt);
+                radD100ActionPerformed(evt);
             }
         });
-        jPanel11.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
+        jPanel11.add(radD100, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
 
-        buttonGroup3.add(jRadioButton9);
-        jRadioButton9.setText("500");
-        jRadioButton9.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup3.add(radD500);
+        radD500.setText("500");
+        radD500.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton9ActionPerformed(evt);
+                radD500ActionPerformed(evt);
             }
         });
-        jPanel11.add(jRadioButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, -1));
+        jPanel11.add(radD500, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, -1));
 
-        buttonGroup3.add(jRadioButton10);
-        jRadioButton10.setText("50");
-        jRadioButton10.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup3.add(radD50);
+        radD50.setText("50");
+        radD50.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton10ActionPerformed(evt);
+                radD50ActionPerformed(evt);
             }
         });
-        jPanel11.add(jRadioButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
+        jPanel11.add(radD50, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
 
-        buttonGroup3.add(jRadioButton11);
-        jRadioButton11.setText("200");
-        jRadioButton11.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup3.add(radD200);
+        radD200.setText("200");
+        radD200.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton11ActionPerformed(evt);
+                radD200ActionPerformed(evt);
             }
         });
-        jPanel11.add(jRadioButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
+        jPanel11.add(radD200, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
 
-        buttonGroup3.add(jRadioButton12);
-        jRadioButton12.setText("20");
-        jRadioButton12.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup3.add(radD20);
+        radD20.setText("20");
+        radD20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton12ActionPerformed(evt);
+                radD20ActionPerformed(evt);
             }
         });
-        jPanel11.add(jRadioButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        jPanel11.add(radD20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel28.setText("Quick amount");
@@ -748,9 +750,9 @@ public class Finals extends javax.swing.JFrame {
         jPanel28.setPreferredSize(new java.awt.Dimension(670, 450));
         jPanel28.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setName(""); // NOI18N
-        jPanel28.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 240, 41));
+        txtAccountNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtAccountNo.setName(""); // NOI18N
+        jPanel28.add(txtAccountNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 240, 41));
 
         jLabel75.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel75.setText("Enter Amount");
@@ -842,14 +844,20 @@ public class Finals extends javax.swing.JFrame {
         ckbPaybills.setText("I confirm that the details are correct");
         jPanel36.add(ckbPaybills, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
+        txtAreaBills.setColumns(20);
+        txtAreaBills.setRows(5);
+        jScrollPane5.setViewportView(txtAreaBills);
+
+        jPanel36.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 280, 160));
+
         jPanel28.add(jPanel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 300, 350));
 
-        jTextField12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField12.setName(""); // NOI18N
-        jPanel28.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 240, 41));
+        txtAmountbills.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtAmountbills.setName(""); // NOI18N
+        jPanel28.add(txtAmountbills, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 240, 41));
 
-        jCheckBox3.setText("Protect your fee? add 2% of your bill");
-        jPanel28.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
+        ckbProtectFee.setText("Protect your fee? add 2% of your bill");
+        jPanel28.add(ckbProtectFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel10.setText("Pay Bills");
@@ -889,15 +897,20 @@ public class Finals extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Type", "Method", "Receiver", "Amount"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -1429,7 +1442,6 @@ public class Finals extends javax.swing.JFrame {
 
         frmSignUp.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         frmSignUp.setBounds(new java.awt.Rectangle(0, 0, 320, 440));
-        frmSignUp.setPreferredSize(new java.awt.Dimension(332, 440));
 
         pnlSignUp.setBackground(new java.awt.Color(255, 255, 255));
         pnlSignUp.setPreferredSize(new java.awt.Dimension(350, 440));
@@ -1563,7 +1575,6 @@ public class Finals extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(250, 242, 235));
         setBounds(new java.awt.Rectangle(0, 0, 900, 600));
-        setPreferredSize(new java.awt.Dimension(900, 600));
         setSize(new java.awt.Dimension(800, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1670,29 +1681,29 @@ public class Finals extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAccountListActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void radS200ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radS200ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_radS200ActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void radS20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radS20ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_radS20ActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void radS50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radS50ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_radS50ActionPerformed
 
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+    private void radS100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radS100ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
+    }//GEN-LAST:event_radS100ActionPerformed
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+    private void radS500ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radS500ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
+    }//GEN-LAST:event_radS500ActionPerformed
 
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+    private void radS1000ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radS1000ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton6ActionPerformed
+    }//GEN-LAST:event_radS1000ActionPerformed
 
     private void cmbDepositMethodsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepositMethodsActionPerformed
         // TODO add your handling code here:
@@ -1720,29 +1731,29 @@ public class Finals extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPartnerOutletActionPerformed
 
-    private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7ActionPerformed
+    private void radD1000ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radD1000ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton7ActionPerformed
+    }//GEN-LAST:event_radD1000ActionPerformed
 
-    private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
+    private void radD100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radD100ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton8ActionPerformed
+    }//GEN-LAST:event_radD100ActionPerformed
 
-    private void jRadioButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton9ActionPerformed
+    private void radD500ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radD500ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton9ActionPerformed
+    }//GEN-LAST:event_radD500ActionPerformed
 
-    private void jRadioButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton10ActionPerformed
+    private void radD50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radD50ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton10ActionPerformed
+    }//GEN-LAST:event_radD50ActionPerformed
 
-    private void jRadioButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton11ActionPerformed
+    private void radD200ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radD200ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton11ActionPerformed
+    }//GEN-LAST:event_radD200ActionPerformed
 
-    private void jRadioButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton12ActionPerformed
+    private void radD20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radD20ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton12ActionPerformed
+    }//GEN-LAST:event_radD20ActionPerformed
 
     private void cmbBillerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBillerActionPerformed
         // TODO add your handling code here:
@@ -1854,6 +1865,40 @@ public class Finals extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void btSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSendActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Money Sent Successfully!", "Transaction", JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(null, "Insufficient Funds!", "ERROR", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_btSendActionPerformed
+
+    private void btDepositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDepositActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Deposit Successfull", "Transaction", JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(null, "Insufficient funds!", "ERROR", javax.swing.JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_btDepositActionPerformed
+
+    private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
+        // TODO add your handling code here:
+        Account account = new Account();
+        
+        double enteredAmount = Double.parseDouble(txtAmount.getText());
+        
+        String receiver = txtSMobileNumber.getText();
+        double currentBalance = account.getBalance(); 
+        double totalBalance = currentBalance - enteredAmount;
+        
+        if (totalBalance < 0) {
+            JOptionPane.showMessageDialog(null, "Insufficient funds!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        
+        /*txtAreaSend.setText(
+        "Receiver: " + receiver + "\n" +
+        "Saks (Balance): " + currentBalance + "\n" +
+        "You are about to send: " + enteredAmount + "\n" +
+        "Total balance: " + totalBalance );*/
+        
+    }//GEN-LAST:event_txtAmountActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1915,6 +1960,7 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAccountList;
     private javax.swing.JCheckBox ckbDeposit;
     private javax.swing.JCheckBox ckbPaybills;
+    private javax.swing.JCheckBox ckbProtectFee;
     private javax.swing.JCheckBox ckbSend;
     private javax.swing.JComboBox<String> cmbBiller;
     private javax.swing.JComboBox<String> cmbBills;
@@ -1927,7 +1973,6 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1949,20 +1994,12 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
@@ -2040,20 +2077,11 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton11;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
@@ -2069,13 +2097,8 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel pnlAccount;
     private javax.swing.JPanel pnlBills;
     private javax.swing.JPanel pnlDashBoard;
@@ -2085,6 +2108,18 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSend;
     private javax.swing.JPanel pnlSignUp;
     private javax.swing.JPanel pnlTransaction;
+    private javax.swing.JRadioButton radD100;
+    private javax.swing.JRadioButton radD1000;
+    private javax.swing.JRadioButton radD20;
+    private javax.swing.JRadioButton radD200;
+    private javax.swing.JRadioButton radD50;
+    private javax.swing.JRadioButton radD500;
+    private javax.swing.JRadioButton radS100;
+    private javax.swing.JRadioButton radS1000;
+    private javax.swing.JRadioButton radS20;
+    private javax.swing.JRadioButton radS200;
+    private javax.swing.JRadioButton radS50;
+    private javax.swing.JRadioButton radS500;
     private javax.swing.JTabbedPane tbMenu;
     private javax.swing.JToggleButton tbtAccount;
     private javax.swing.JToggleButton tbtBills;
@@ -2092,8 +2127,16 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JToggleButton tbtDeposit;
     private javax.swing.JToggleButton tbtSend;
     private javax.swing.JToggleButton tbtTransaction;
+    private javax.swing.JTextField txtAccountNo;
+    private javax.swing.JTextField txtAmount;
+    private javax.swing.JTextField txtAmountDepo;
+    private javax.swing.JTextField txtAmountbills;
+    private javax.swing.JTextArea txtAreaBills;
+    private javax.swing.JTextArea txtAreaDeposit;
+    private javax.swing.JTextArea txtAreaSend;
     private javax.swing.JPasswordField txtLPassword;
     private javax.swing.JTextField txtLUsername;
+    private javax.swing.JTextField txtNumber;
     private javax.swing.JTextField txtSMobileNumber;
     private javax.swing.JPasswordField txtSPassword;
     private javax.swing.JTextField txtSUsername;
