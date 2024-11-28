@@ -11,10 +11,10 @@ import javax.swing.JOptionPane;
 
 public abstract class Account {
     private String accountNameHolder, mobileNo, password;
-    private Double balance;
+    private double balance;
     
     
-    public Account(String accountNameHolder, String mobileNo,String password, Double balance)
+    public Account(String accountNameHolder, String mobileNo,String password, double balance)
     {
         this.accountNameHolder = accountNameHolder;
         this.mobileNo = mobileNo;
