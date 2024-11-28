@@ -26,23 +26,6 @@ public class Paybills extends Transaction{
     @Override
     public void performTransaction(Account account) {
         double totalAmount = getAmount();
-
-        
-        if (protectFee) {
-            totalAmount += totalAmount * 0.02; 
-        }
-        if (account.getBalance() >= totalAmount) {
-            account.setBalance(account.getBalance() - totalAmount);
-            JOptionPane.showMessageDialog(null, "Payment Successful!\n" + 
-                                                "Bill: " + billName + "\n" +
-                                                "Biller: " + billerName + "\n" +
-                                                "Amount: " + totalAmount + "\n" +
-                                                "Account Number: " + accountNumber, 
-                                                "Transaction Successful", 
-                                                JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Insufficient funds!", "ERROR", JOptionPane.WARNING_MESSAGE);
-        }
     }
     
 }
