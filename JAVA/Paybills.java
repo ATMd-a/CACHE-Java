@@ -10,7 +10,7 @@
 import javax.swing.JOptionPane;
 public class Paybills extends Transaction{
     private  String billName;
-     private String billerName;
+    private String billerName;
     private String accountNumber;
     private boolean protectFee;
     
