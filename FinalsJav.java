@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author althea
  */
 public class Finals extends javax.swing.JFrame {
-
+     Ewallet wallet = new Ewallet(String accountNameHolder, String mobileNo, String password, double balance);
     /**
      * Creates new form Finals
      */
@@ -1879,23 +1879,23 @@ public class Finals extends javax.swing.JFrame {
 
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
         // TODO add your handling code here:
-        Account account = new Account();
-        
+        // TODO add your handling code here:
         double enteredAmount = Double.parseDouble(txtAmount.getText());
         
         String receiver = txtSMobileNumber.getText();
-        double currentBalance = account.getBalance(); 
+        double currentBalance = wallet.getBalance(); 
         double totalBalance = currentBalance - enteredAmount;
         
         if (totalBalance < 0) {
             JOptionPane.showMessageDialog(null, "Insufficient funds!", "Error", JOptionPane.ERROR_MESSAGE);
         return;
+        }
         
-        /*txtAreaSend.setText(
+        txtAreaSend.setText(
         "Receiver: " + receiver + "\n" +
         "Saks (Balance): " + currentBalance + "\n" +
         "You are about to send: " + enteredAmount + "\n" +
-        "Total balance: " + totalBalance );*/
+        "Total balance: " + totalBalance );
         
     }//GEN-LAST:event_txtAmountActionPerformed
 
