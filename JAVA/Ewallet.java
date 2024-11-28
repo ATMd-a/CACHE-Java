@@ -10,18 +10,18 @@
 import javax.swing.JOptionPane;
 public class Ewallet extends Account {
     
-    public Ewallet(String accountNameHolder, Double balance)
+    public Ewallet(String accountNameHolder, String mobileNo, String password, double balance)
     {
-        super(accountNameHolder, balance);
+        super(accountNameHolder,mobileNo, password, balance);
     }
     
     public void performTransaction(double amount)
     {
-        if(amount > 0 ){
-           setBalance(getBalance()+ amount); 
-           JOptionPane.showMessageDialog(null, "Deposit successful!", "Transaction", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        } else{
-            JOptionPane.showMessageDialog(null, "Insufficient funds!", "ERROR", javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (amount > 0) {
+            setBalance(getBalance() + amount); 
+            JOptionPane.showMessageDialog(null, "Deposit successful!", "Transaction", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Insufficient funds!", "ERROR", JOptionPane.WARNING_MESSAGE);
         }
         
     }
