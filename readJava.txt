@@ -93,4 +93,44 @@ private void ckbProtectFeeActionPerformed(java.awt.event.ActionEvent evt) {
         } else {
             JOptionPane.showMessageDialog(null, "Please enter a valid account number and amount", "Input Error", JOptionPane.WARNING_MESSAGE);
         }
-    }                          
+    }  
+
+
+
+
+private void btLSignupActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+        frmSignUp.setVisible(true); // Show the original frame
+        frmLogin.dispose();
+        
+        String mobileNo = txtSMobileNumber.getText();
+                String username = txtSUsername.getText();
+                String password = new String(txtSPassword.getPassword());
+        Ewallet newAccount = new Ewallet("Default Account", mobileNo, password, 0.0);
+        AccountManager.addAccount(username, newAccount);
+        JOptionPane.showMessageDialog(null, "Account created successfully!", "Sign Up", JOptionPane.INFORMATION_MESSAGE);
+        
+    }                           
+
+
+
+
+
+private void btLLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:   
+        String username = txtLUsername.getText();
+        String password = new String(txtLPassword.getPassword());
+        
+        Account account = AccountManager.getAccount(username);
+        
+        if (account != null && account.authenticate(password)) {
+                    JOptionPane.showMessageDialog(null, "Login successful!", "Login", JOptionPane.INFORMATION_MESSAGE);  
+                } else {    
+                    JOptionPane.showMessageDialog(null, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
+                }
+        //Database functions
+        
+    
+
+        
+    }                   
