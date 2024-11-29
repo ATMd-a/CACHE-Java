@@ -2166,46 +2166,48 @@ public class Finals extends javax.swing.JFrame {
     private void btPaybillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPaybillsActionPerformed
         // TODO add your handling code here:
          try {
-        
-            String biller = cmbBiller.getSelectedItem().toString(); 
-            double billAmount = Double.parseDouble(txtAmountBills.getText().trim());  
-
-            
+            String biller = cmbBiller.getSelectedItem().toString();
+            double billAmount = Double.parseDouble(txtAmountBills.getText().trim());
+    
             if (billAmount <= 0) {
                 JOptionPane.showMessageDialog(this, "Amount must be greater than 0.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
+    
+            
+            if (ckbProtectFee.isSelected()) {
+                billAmount += billAmount * 0.02;
+            }
+    
             
             PayBills payBills = new PayBills(biller, billAmount);
-
-            
+    
             Account account = new Account();  
-            payBills.pay(account);  
-
-            
+    
+            payBills.pay(account);
+    
             if (account.getBalance() >= billAmount) {
-                JOptionPane.showMessageDialog(this, "Bill payment to " + biller + " of " + billAmount + " was successful.", "Payment Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Bill payment to " + biller + " of " + String.format("%.2f", billAmount) + " was successful.", "Payment Success", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Insufficient balance to pay the bill.", "Payment Failed", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-           
-            String[] rowData = {
-                payBills.getTransactionType(),
-                payBills.getRecipient(),
-                String.format("%.2f", payBills.getAmount())
-            };
 
-            // Update all tables with the transaction details
-            DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
-            DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
-            DefaultTableModel model8 = (DefaultTableModel) jTable8.getModel();
+        String[] rowData = {
+            payBills.getTransactionType(),
+            payBills.getRecipient(),
+            String.format("%.2f", payBills.getAmount()) // Show the amount with two decimal places
+        };
 
-            model1.addRow(rowData);
-            model2.addRow(rowData);
-            model8.addRow(rowData);
+        // Update all tables with the transaction details
+        DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel model8 = (DefaultTableModel) jTable8.getModel();
+
+        model1.addRow(rowData);
+        model2.addRow(rowData);
+        model8.addRow(rowData);
 
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Invalid input. Please enter a numeric value for the amount.", "Input Error", JOptionPane.ERROR_MESSAGE);
