@@ -115,3 +115,40 @@ public class TransactionService {
     }
 }
 
+
+//sampole pag nasa finals.java
+package Main;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Create User and Account
+        User user = new User();
+        user.setName("John Doe");
+        user.setPassword("password123");
+        user.setMobileNumber("09123456789");
+
+        Account account = new Account();
+        account.setBalance(5000); // Initial balance
+
+        // Example 1: Send Money
+        Payment sendMoney = new SendMoney("Jane Smith", 1000);
+        sendMoney.pay(account); // Deduct from account
+        TransactionService transactionService = new TransactionService();
+        transactionService.saveTransaction(1, sendMoney); // Save to database (wallet ID is 1)
+
+        // Example 2: Deposit Money
+        Payment deposit = new Deposit(2000);
+        deposit.pay(account); // Add to account
+        transactionService.saveTransaction(1, deposit);
+
+        // Example 3: Pay Bills
+        Payment payBills = new PayBills("Electric Company", 1500);
+        payBills.pay(account); // Deduct from account
+        transactionService.saveTransaction(1, payBills);
+
+        // Check final balance
+        System.out.println("Final Balance: " + account.getBalance());
+    }
+}
+
