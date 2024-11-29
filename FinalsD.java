@@ -4,9 +4,6 @@
  */
 
 
-import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JOptionPane;
