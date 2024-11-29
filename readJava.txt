@@ -1,37 +1,6 @@
-try {
-            double depositAmount = Double.parseDouble(txtAmount.getText().trim());
-            if (depositAmount <= 0) {
-            JOptionPane.showMessageDialog(this, "Amount must be greater than 0.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        // Create a Deposit payment object
-        Deposit deposit = new Deposit(depositAmount);
-        
-        deposit.pay(account); 
-        
-        TransactionService transactionService = new TransactionService();
-        transactionService.saveTransaction(walletId, deposit);
+changes: 
+//btDeposit, btPaybills, btSend, User
 
-        JOptionPane.showMessageDialog(this, "Deposit of " + depositAmount + " successfully processed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+global: 
+//Private Acount account; Private int walletId;
 
-        String[] rowData = {
-            deposit.getTransactionType(),
-            deposit.getRecipient(),
-            String.format("%.2f", deposit.getAmount())
-        };
-        
-        DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
-        DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
-        DefaultTableModel model7 = (DefaultTableModel) jTable7.getModel();
-        
-        model1.addRow(rowData);
-        model2.addRow(rowData);
-        model7.addRow(rowData);
-        
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Invalid input. Please enter a numeric value for the deposit amount.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    }
