@@ -1,0 +1,154 @@
+//for abstract
+package Main;
+
+public abstract class Payment {
+    protected String transactionType; // E.g., "SendMoney", "PayBills"
+    protected String recipient;
+    protected double amount;
+
+    // Constructor
+    public Payment(String transactionType, String recipient, double amount) {
+        this.transactionType = transactionType;
+        this.recipient = recipient;
+        this.amount = amount;
+    }
+
+    // Abstract method to process the payment
+    public abstract void pay(Account account);
+
+    // Getters for transaction details
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+}
+
+
+//for inheritance of sendmoney, deposit, paybills
+package Main;
+
+// SendMoney Transaction
+public class SendMoney extends Payment {
+
+    public SendMoney(String recipient, double amount) {
+        super("SendMoney", recipient, amount);
+    }
+
+    @Override
+    public void pay(Account account) {
+        if (account.getBalance() >= amount) {
+            account.deductBalance(amount);
+            System.out.println("Successfully sent " + amount + " to " + recipient);
+        } else {
+            System.out.println("Insufficient balance to send money.");
+        }
+    }
+}
+
+// Deposit Transaction
+public class Deposit extends Payment {
+
+    public Deposit(double amount) {
+        super("Deposit", "Self", amount); // Recipient is "Self" for deposits
+    }
+
+    @Override
+    public void pay(Account account) {
+        account.addBalance(amount);
+        System.out.println("Successfully deposited " + amount);
+    }
+}
+
+// PayBills Transaction
+public class PayBills extends Payment {
+
+    public PayBills(String biller, double amount) {
+        super("PayBills", biller, amount);
+    }
+
+    @Override
+    public void pay(Account account) {
+        if (account.getBalance() >= amount) {
+            account.deductBalance(amount);
+            System.out.println("Successfully paid biller " + recipient + " an amount of " + amount);
+        } else {
+            System.out.println("Insufficient balance to pay bills.");
+        }
+    }
+}
+
+
+//for ttransaction records
+package Main;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class TransactionService {
+
+    public void saveTransaction(int walletId, Payment payment) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ewallet", "root", "Silver.pass1")) {
+            String query = "INSERT INTO tblTransaction (W_ID, T_Balance, T_Type, T_Recipient) VALUES (?, ?, ?, ?)";
+            
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, walletId);
+            stmt.setDouble(2, payment.getAmount());
+            stmt.setString(3, payment.getTransactionType());
+            stmt.setString(4, payment.getRecipient());
+            
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Transaction saved successfully!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to save the transaction.");
+        }
+    }
+}
+
+
+//sampole pag nasa finals.java
+package Main;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Create User and Account
+        User user = new User();
+        user.setName("John Doe");
+        user.setPassword("password123");
+        user.setMobileNumber("09123456789");
+
+        Account account = new Account();
+        account.setBalance(5000); // Initial balance
+
+        // Example 1: Send Money
+        Payment sendMoney = new SendMoney("Jane Smith", 1000);
+        sendMoney.pay(account); // Deduct from account
+        TransactionService transactionService = new TransactionService();
+        transactionService.saveTransaction(1, sendMoney); // Save to database (wallet ID is 1)
+
+        // Example 2: Deposit Money
+        Payment deposit = new Deposit(2000);
+        deposit.pay(account); // Add to account
+        transactionService.saveTransaction(1, deposit);
+
+        // Example 3: Pay Bills
+        Payment payBills = new PayBills("Electric Company", 1500);
+        payBills.pay(account); // Deduct from account
+        transactionService.saveTransaction(1, payBills);
+
+        // Check final balance
+        System.out.println("Final Balance: " + account.getBalance());
+    }
+}
+
