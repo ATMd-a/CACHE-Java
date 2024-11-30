@@ -1,0 +1,126 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Main;
+
+/**
+ *
+ * @author althea
+ */
+import java.sql.*;
+
+public class TransactionService {
+
+    public void saveTransaction(int walletId, Payment payment) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ewallet", "root", "Silver.pass1")) {
+            String query = "INSERT INTO tblTransaction (W_ID, T_Balance, T_Type, T_Recipient) VALUES (?, ?, ?, ?)";
+            
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, walletId);
+            stmt.setDouble(2, payment.getAmount());
+            stmt.setString(3, payment.getTransactionType());
+            stmt.setString(4, payment.getRecipient());
+            
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Transaction saved successfully!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to save the transaction.");
+        }
+    }
+    
+    public int getWalletIdByMobileNumber(String userMobileNumber) {
+        int walletId = -1;  // Default to -1 if no wallet found
+
+        String url = "jdbc:mysql://localhost:3306/ewallet";
+        String dbUser = "root";
+        String dbPass = "Silver.pass1";
+        String query = "SELECT W_ID FROM tblWallet WHERE U_Number = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, dbUser, dbPass);
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+            
+            stmt.setString(1, userMobileNumber);  // Set the mobile number
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                walletId = rs.getInt("W_ID");  // Retrieve the wallet ID
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return walletId;  // Return the wallet ID or -1 if not found
+    }
+    
+    public void processTransaction(int senderWalletId, int recipientWalletId, double amount) {
+        Connection connection = null;
+        try {
+            // Establish connection to the database
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ewallet", "root", "Silver.pass1");
+
+            // Start a transaction
+            connection.setAutoCommit(false);  // Disable auto-commit to manually handle commit/rollback
+
+            // Deduct money from the sender's wallet
+            String deductQuery = "UPDATE tblWallet SET W_Balance = W_Balance - ? WHERE W_ID = ?";
+            try (PreparedStatement deductStmt = connection.prepareStatement(deductQuery)) {
+                deductStmt.setDouble(1, amount);  // Deduct the amount from sender
+                deductStmt.setInt(2, senderWalletId);  // Sender's wallet ID
+                int rowsAffectedSender = deductStmt.executeUpdate();
+
+                if (rowsAffectedSender == 0) {
+                    // If no rows were updated (e.g., sender's wallet doesn't exist), rollback
+                    connection.rollback();
+                    System.out.println("Failed to update sender's wallet. Transaction rolled back.");
+                    return;
+                }
+            }
+
+            // Add money to the recipient's wallet
+            String addQuery = "UPDATE tblWallet SET W_Balance = W_Balance + ? WHERE W_ID = ?";
+            try (PreparedStatement addStmt = connection.prepareStatement(addQuery)) {
+                addStmt.setDouble(1, amount);  // Add the amount to recipient
+                addStmt.setInt(2, recipientWalletId);  // Recipient's wallet ID
+                int rowsAffectedRecipient = addStmt.executeUpdate();
+
+                if (rowsAffectedRecipient == 0) {
+                    // If no rows were updated (e.g., recipient's wallet doesn't exist), rollback
+                    connection.rollback();
+                    System.out.println("Failed to update recipient's wallet. Transaction rolled back.");
+                    return;
+                }
+            }
+
+            // If both updates succeed, commit the transaction
+            connection.commit();
+            System.out.println("Transaction processed successfully: " + amount + " sent to recipient.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                // In case of any error, rollback the transaction
+                if (connection != null) {
+                    connection.rollback();
+                }
+                System.out.println("Error occurred. Transaction rolled back.");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } finally {
+            try {
+                // Ensure that the auto-commit mode is restored to true after the operation
+                if (connection != null) {
+                    connection.setAutoCommit(true);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
+}
