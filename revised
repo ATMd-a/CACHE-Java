@@ -1,0 +1,46 @@
+private void btSendActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    // Get the selected user/account
+    String selectedUserName = (String) cmbSelectAccount.getSelectedItem();
+
+    // Get the recipient account number and amount
+    String sNumber = txtSNumber.getText();
+    String amountText = txtAmount.getText();
+
+    // Validate input
+    if (sNumber.isEmpty() || amountText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill out all fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    double amount = 0.0;
+    try {
+        amount = Double.parseDouble(amountText);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid amount.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Get the account and wallet ID dynamically (replace these with your actual methods)
+    Account account = getAccountForSelectedUser(selectedUserName); // Implement this
+    int walletId = getWalletIdForSelectedUser(selectedUserName);  // Implement this
+
+    // Check for sufficient balance
+    if (account.getBalance() < amount) {
+        JOptionPane.showMessageDialog(this, "Insufficient balance.", "Transaction Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Perform the transaction
+    SendMoney sendMoney = new SendMoney(sNumber, amount);
+    sendMoney.pay(account);
+
+    // Save the transaction to the database
+    TransactionService transactionService = new TransactionService();
+    transactionService.saveTransaction(walletId, sendMoney);
+
+    // Update balance in UI
+    lblBalance.setText(String.valueOf(account.getBalance()));
+
+    // Confirmation message
+    JOptionPane.showMessageDialog(this, "Transaction successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+}
