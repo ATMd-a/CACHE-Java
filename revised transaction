@@ -1,0 +1,35 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Main;
+
+/**
+ *
+ * @author althea
+ */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class TransactionService {
+
+    public void saveTransaction(Payment payment) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ewallet", "root", "Silver.pass1")) {
+            String query = "INSERT INTO tblTransaction (T_Balance, T_Type, T_Recipient) VALUES (?, ?, ?)";
+            
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setDouble(1, payment.getAmount());
+            stmt.setString(2, payment.getTransactionType());
+            stmt.setString(3, payment.getRecipient());
+            
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Transaction saved successfully!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to save the transaction.");
+        }
+    }
+}
