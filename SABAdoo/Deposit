@@ -11,7 +11,7 @@ package Main;
 public class Deposit extends Payment {
 
     public Deposit(double amount) {
-        super("Deposit", "Self", amount); // Recipient is "Self" for deposits
+        super("In", "Deposit", "My Account", amount); // Recipient is "Self" for deposits
     }
 
     @Override
