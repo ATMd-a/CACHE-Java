@@ -11,7 +11,7 @@ package Main;
 public class SendMoney extends Payment {
 
     public SendMoney(String recipient, double amount) {
-        super("SendMoney", recipient, amount);
+        super("Out", "SendMoney", recipient, amount);
     }
 
     @Override
