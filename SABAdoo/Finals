@@ -71,7 +71,8 @@ public class Finals extends javax.swing.JFrame {
             connection = DriverManager.getConnection(url, user, pass);
             System.out.println("Database connected successfully!");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error connecting to database: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error connecting to database: " +
+                    e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -86,8 +87,8 @@ public class Finals extends javax.swing.JFrame {
                 System.out.println("Database connection closed.");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error closing database connection: " + ex.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error closing database connection: " +
+                    ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
    
@@ -115,7 +116,6 @@ public class Finals extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
         pnlSend = new javax.swing.JPanel();
         jPanel27 = new javax.swing.JPanel();
         txtAmount = new javax.swing.JTextField();
@@ -294,7 +294,6 @@ public class Finals extends javax.swing.JFrame {
 
         pnlDashBoard.setBackground(new java.awt.Color(250, 242, 235));
         pnlDashBoard.setPreferredSize(new java.awt.Dimension(530, 500));
-        pnlDashBoard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -339,22 +338,16 @@ public class Finals extends javax.swing.JFrame {
         });
         jPanel13.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 88, 34));
 
-        pnlDashBoard.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 700, 130));
-
         jPanel25.setBackground(new java.awt.Color(255, 255, 255));
         jPanel25.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel25.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Type", "Method", "Receiver", "Amount"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -395,28 +388,42 @@ public class Finals extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        pnlDashBoard.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 700, 320));
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("Welcome in,");
-        pnlDashBoard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 130, -1));
 
         lblName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblName.setText("User!");
-        pnlDashBoard.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 360, -1));
 
-        jButton10.setText("Refresh");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        pnlDashBoard.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 88, 34));
+        javax.swing.GroupLayout pnlDashBoardLayout = new javax.swing.GroupLayout(pnlDashBoard);
+        pnlDashBoard.setLayout(pnlDashBoardLayout);
+        pnlDashBoardLayout.setHorizontalGroup(
+            pnlDashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDashBoardLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pnlDashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDashBoardLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(10, 10, 10)
+                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        pnlDashBoardLayout.setVerticalGroup(
+            pnlDashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDashBoardLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(pnlDashBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(lblName))
+                .addGap(11, 11, 11)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         tbMenu.addTab("DashBoard", pnlDashBoard);
 
         pnlSend.setBackground(new java.awt.Color(250, 242, 235));
-        pnlSend.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel27.setBackground(new java.awt.Color(255, 255, 255));
         jPanel27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -573,11 +580,27 @@ public class Finals extends javax.swing.JFrame {
         lblCurBal.setText("(Current Bal: 12345678)");
         jPanel27.add(lblCurBal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 130, -1));
 
-        pnlSend.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 700, 460));
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setText("Express Send");
-        pnlSend.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 170, -1));
+
+        javax.swing.GroupLayout pnlSendLayout = new javax.swing.GroupLayout(pnlSend);
+        pnlSend.setLayout(pnlSendLayout);
+        pnlSendLayout.setHorizontalGroup(
+            pnlSendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSendLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pnlSendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        pnlSendLayout.setVerticalGroup(
+            pnlSendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSendLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel7)
+                .addGap(11, 11, 11)
+                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         tbMenu.addTab("Send", pnlSend);
 
@@ -907,10 +930,7 @@ public class Finals extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Type", "Method", "Receiver", "Amount"
@@ -924,8 +944,8 @@ public class Finals extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -939,10 +959,7 @@ public class Finals extends javax.swing.JFrame {
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Type", "Method", "Receiver", "Amount"
@@ -971,10 +988,7 @@ public class Finals extends javax.swing.JFrame {
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Type", "Method", "Receiver", "Amount"
@@ -1003,10 +1017,7 @@ public class Finals extends javax.swing.JFrame {
 
         jTable8.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Type", "Method", "Receiver", "Amount"
@@ -1145,7 +1156,7 @@ public class Finals extends javax.swing.JFrame {
 
         tbMenu.addTab("Account", pnlAccount);
 
-        frmMainWindow.getContentPane().add(tbMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 0, 770, 600));
+        frmMainWindow.getContentPane().add(tbMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 770, 600));
 
         pnlNavigator.setBackground(new java.awt.Color(32, 30, 31));
         pnlNavigator.setPreferredSize(new java.awt.Dimension(800, 80));
@@ -1712,7 +1723,8 @@ public class Finals extends javax.swing.JFrame {
         String password = new String(txtLPassword.getPassword());
 
         if (mobileNumber.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter both mobile number and password.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please enter both mobile number and password.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -1774,10 +1786,12 @@ public class Finals extends javax.swing.JFrame {
                 frmLogin.dispose();
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Login Failed: Invalid Mobile Number or Password", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Login Failed: Invalid Mobile Number or Password",
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " +
+                    e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             // Close resources to prevent memory leaks
             try {
@@ -1785,7 +1799,8 @@ public class Finals extends javax.swing.JFrame {
                 if (stmt != null) stmt.close();
                 if (connection != null) connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error closing resources: " +
+                        ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }                                        
@@ -1933,7 +1948,8 @@ public class Finals extends javax.swing.JFrame {
             
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " +
+                    e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             // Close resources to prevent memory leaks
             try {
@@ -1941,7 +1957,8 @@ public class Finals extends javax.swing.JFrame {
                 if (stmt != null) stmt.close();
                 if (connection != null) connection.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error closing resources: " +
+                        ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }                                       
@@ -1978,13 +1995,15 @@ public class Finals extends javax.swing.JFrame {
 
         // Check if any field is empty
         if (userID.isEmpty() || username.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter all credentials.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please enter all credentials.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Validate mobile number (must be 11 digits)
         if (userID.length() != 11 || !userID.matches("\\d{11}")) {
-            JOptionPane.showMessageDialog(this, "Mobile number must be exactly 11 digits.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Mobile number must be exactly 11 digits.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -2011,7 +2030,8 @@ public class Finals extends javax.swing.JFrame {
 
             // If mobile number exists, show error message
             if (resultSet.next()) {
-                JOptionPane.showMessageDialog(this, "Mobile number already exists. Please use a different number.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Mobile number already exists. Please use a different number.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -2049,15 +2069,19 @@ public class Finals extends javax.swing.JFrame {
                     frmSignUp.dispose();
                     frmLogin.setVisible(true);
 
-                    JOptionPane.showMessageDialog(this, "Sign-up successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Sign-up successful!",
+                            "Success", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Error creating wallet.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Error creating wallet.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Sign-up failed.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Sign-up failed.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error during sign-up: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error during sign-up: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             // Close resources to prevent memory leaks
             try {
@@ -2069,7 +2093,8 @@ public class Finals extends javax.swing.JFrame {
                     connection.close();
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error closing resources: " +
+                        ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }                                         
@@ -2082,11 +2107,6 @@ public class Finals extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmSignUp.setVisible(true); // Show the original frame
         frmLogin.dispose();
-    }                                         
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-        tbMenu.setSelectedIndex(2);
     }                                         
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -2199,11 +2219,13 @@ public class Finals extends javax.swing.JFrame {
                     String uNumber = resultSet.getString("U_Number");
                     txtSNumber.setText(uNumber);  // Set the U_Number in the txtNumber text field
                 } else {
-                    JOptionPane.showMessageDialog(this, "No account found for the selected username.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "No account found for the selected username.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " +
+                        e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } finally {
                 // Close resources to prevent memory leaks
                 try {
@@ -2211,7 +2233,8 @@ public class Finals extends javax.swing.JFrame {
                     if (stmt != null) stmt.close();
                     if (connection != null) connection.close();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Error closing resources: " +
+                            ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -2233,7 +2256,8 @@ public class Finals extends javax.swing.JFrame {
         try {
             amount = Double.parseDouble(amountText);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please enter a valid number.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return; // Exit the method if amount is invalid
         }
 
@@ -2244,7 +2268,8 @@ public class Finals extends javax.swing.JFrame {
         try {
             balance = Double.parseDouble(sbalance); // Convert balance to double
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid balance format.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid balance format.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return; // Exit the method if balance is invalid
         }
 
@@ -2254,7 +2279,8 @@ public class Finals extends javax.swing.JFrame {
 
         // Compare the balance with the amount entered
         if (balance < amount) {
-            JOptionPane.showMessageDialog(null, "Insufficient Balance", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Insufficient Balance",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             // Code to print the information in the text area
             String message = "\nName:       " + selectedUserName + 
@@ -2270,66 +2296,73 @@ public class Finals extends javax.swing.JFrame {
 
     private void btDepositActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-        String selectedUserName = (String) cmbSelectAccount.getSelectedItem();
+        String username = txtAMobileNo.getText();
+        //String depositMethods = (String) cmbDepositMethods.getSelectedItem();
+        String partnerOutlet = (String) cmbPartnerOutlet.getSelectedItem();
+        String amountText = txtAmountDepo.getText();
+        double amount = 0.0;
 
-        if (selectedUserName != null && !selectedUserName.isEmpty()) {
-            double depositAmount = Double.parseDouble(txtAmountDepo.getText()); 
-
-            if (depositAmount > 0) {
-                String url = "jdbc:mysql://localhost:3306/ewallet";
-                String dbUser = "root";
-                String dbPass = "Silver.pass1";
-                Connection connection = null;
-                PreparedStatement stmt = null;
-                ResultSet resultSet = null;
-
-                try {
-                    connection = DriverManager.getConnection(url, dbUser, dbPass);
-
-                    String query = "SELECT U_Number FROM tblAccount WHERE U_Name = ?";
-                    stmt = connection.prepareStatement(query);
-                    stmt.setString(1, selectedUserName);
-
-                    resultSet = stmt.executeQuery();
-
-                    if (resultSet.next()) {
-                        String uNumber = resultSet.getString("U_Number");
-
-                        Account selectedAccount = new Account(); 
-                        selectedAccount.addBalance(depositAmount);
-
-                        Deposit depositTransaction = new Deposit(depositAmount);
-                        depositTransaction.pay(selectedAccount);
-
-                        DefaultTableModel tableModel = (DefaultTableModel) jTable7.getModel();
-                        Object[] rowData = { selectedUserName, "Deposit", depositAmount, selectedAccount.getBalance() };
-                        tableModel.addRow(rowData);
-
-                        JOptionPane.showMessageDialog(this, "Deposit of " + depositAmount + " was successful.\nYour new balance is: " + selectedAccount.getBalance(), "Deposit Successful", JOptionPane.INFORMATION_MESSAGE);
-
-                        // Update lblBalance after deposit
-                        lblBalance.setText( String.format("%.2f", selectedAccount.getBalance()));
-
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Account not found.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                } finally {
-                    try {
-                        if (resultSet != null) resultSet.close();
-                        if (stmt != null) stmt.close();
-                        if (connection != null) connection.close();
-                    } catch (SQLException ex) {
-                        JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Please enter a valid deposit amount.", "Invalid Amount", JOptionPane.WARNING_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select an account first.", "No Account Selected", JOptionPane.WARNING_MESSAGE);
+        // Try to parse the amountText to a double
+        try {
+            amount = Double.parseDouble(amountText);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid amount.",
+                    "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if amount is invalid
         }
+        
+        String sbalance = lblBalance.getText();
+        double balance = 0.0;
+
+        try {
+            balance = Double.parseDouble(sbalance); // Convert balance to double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid balance format.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if balance is invalid
+        }
+        Account account = new Account();
+        account.setBalance(balance);
+        
+        
+        TransactionService transactionService = new TransactionService();
+
+// Get wallet ID using the mobile number
+        int receiverWalletId = transactionService.getWalletIdByMobileNumber(username);
+        
+        // Proceed if wallet ID is valid (not -1)
+        if (receiverWalletId != -1) {
+            // Create a SendMoney payment object with recipient and amount
+            
+            Payment deposit = new Deposit(amount);
+            deposit.pay(account);
+            transactionService.saveTransaction(receiverWalletId, deposit);
+            transactionService.depositTransact( receiverWalletId, amount);
+            
+            lblBalance.setText( String.format("%.2f", account.getBalance()));
+            lblCurBal.setText( String.format("%.2f", account.getBalance()));
+        }
+
+        JOptionPane.showMessageDialog(this, "Transaction successful!", 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Optionally add the transaction to the table or perform other updates
+        String[] rowData = {
+            "Send Money",             // Transaction type
+            partnerOutlet,         // Recipient name (or username)
+            String.format("%.2f", amount) // Amount transferred
+        };
+
+        // Get the DefaultTableModel of your tables
+        DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel model8 = (DefaultTableModel) jTable7.getModel();
+
+        // Add the row data to each table
+        model1.addRow(rowData);
+        model2.addRow(rowData);
+        model8.addRow(rowData);
+
     }                                         
 
     private void btDContinueActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -2344,7 +2377,8 @@ public class Finals extends javax.swing.JFrame {
         try {
             amount = Double.parseDouble(amountText);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please enter a valid number.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return; // Exit the method if amount is invalid
         }
 
@@ -2372,7 +2406,8 @@ public class Finals extends javax.swing.JFrame {
         try {
             amount = Double.parseDouble(amountText);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please enter a valid number.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return; // Exit the method if amount is invalid
         }
 
@@ -2383,13 +2418,15 @@ public class Finals extends javax.swing.JFrame {
         try {
             balance = Double.parseDouble(sbalance); // Convert balance to double
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid balance format.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid balance format.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return; // Exit the method if balance is invalid
         }
 
         // Compare the balance with the amount entered
         if (balance < amount) {
-            JOptionPane.showMessageDialog(null, "Insufficient Balance", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Insufficient Balance",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             // Code to print the information in the text area
             String message = "Categories: \t\t" + bill +
@@ -2415,106 +2452,91 @@ public class Finals extends javax.swing.JFrame {
 
     private void btPaybillsActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
+        String biller = cmbBiller.getSelectedItem().toString();
+        String amountText = txtAmountBills.getText().trim();
+        double billAmount = 0.0;
+
+        // Try to parse the billAmount
         try {
-            String biller = cmbBiller.getSelectedItem().toString();
-            double billAmount = Double.parseDouble(txtAmountBills.getText().trim());
-
-            if (billAmount <= 0) {
-                JOptionPane.showMessageDialog(this, "Amount must be greater than 0.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Apply protection fee if checkbox is selected
-            if (ckbProtectFee.isSelected()) {
-                billAmount += billAmount * 0.02;
-            }
-
-            // Retrieve the user's balance from the database
-            String url = "jdbc:mysql://localhost:3306/ewallet";
-            String dbUser = "root";
-            String dbPass = "Silver.pass1";
-            Connection connection = null;
-            PreparedStatement stmt = null;
-            ResultSet resultSet = null;
-            double userBalance = 0;
-
-            try {
-                connection = DriverManager.getConnection(url, dbUser, dbPass);
-
-                // Replace the "01234567890" below with a dynamic value from your program
-                String query = "SELECT W_Balance FROM tblWallet WHERE U_Number = ?";
-                stmt = connection.prepareStatement(query);
-                stmt.setString(1, "01234567890"); // Replace with the actual user number
-
-                resultSet = stmt.executeQuery();
-                if (resultSet.next()) {
-                    userBalance = resultSet.getDouble("W_Balance");
-                } else {
-                    JOptionPane.showMessageDialog(this, "No wallet associated with this user.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            } finally {
-                try {
-                    if (resultSet != null) resultSet.close();
-                    if (stmt != null) stmt.close();
-                    if (connection != null) connection.close();
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(this, "Error closing resources: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-
-            // Check if the user has sufficient balance
-            if (userBalance >= billAmount) {
-                userBalance -= billAmount; 
-
-                // Update the user's balance in the database
-                try {
-                    connection = DriverManager.getConnection(url, dbUser, dbPass);
-
-                    String updateQuery = "UPDATE tblWallet SET W_Balance = ?";
-                    stmt = connection.prepareStatement(updateQuery);
-                    stmt.setDouble(1, userBalance);
-
-                    stmt.executeUpdate();
-
-                    JOptionPane.showMessageDialog(this, "Bill payment to " + biller + " of " + String.format("%.2f", billAmount) + " was successful.", "Payment Success", JOptionPane.INFORMATION_MESSAGE);
-
-
-                    String[] rowData = {
-                        "Pay Bills",
-                        biller,
-                        String.format("%.2f", billAmount)
-                    };
-
-                    DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
-                    DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
-                    DefaultTableModel model8 = (DefaultTableModel) jTable8.getModel();
-
-                    model1.addRow(rowData);
-                    model2.addRow(rowData);
-                    model8.addRow(rowData);
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(this, "Error updating balance: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                } finally {
-                    try {
-                        if (stmt != null) stmt.close();
-                        if (connection != null) connection.close();
-                    } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(this, "Error closing resources: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            } else {
-                // Insufficient balance
-                JOptionPane.showMessageDialog(this, "Insufficient balance to pay the bill.", "Payment Failed", JOptionPane.ERROR_MESSAGE);
-            }
+            billAmount = Double.parseDouble(amountText);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid input. Please enter a numeric value for the amount.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Please enter a valid amount.", 
+                    "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if amount is invalid
+        }
+
+        // Validate the billAmount
+        if (billAmount <= 0) {
+            JOptionPane.showMessageDialog(this, "Amount must be greater than 0.",
+                    "Invalid Amount", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Apply protection fee if checkbox is selected
+        if (ckbProtectFee.isSelected()) {
+            billAmount += billAmount * 0.02; // 2% fee
+        }
+
+        // Getting the user's balance from the UI (replace this with actual user mobile number)
+        String username = txtAMobileNo.getText(); // Example of username, adjust as needed
+        String sbalance = lblBalance.getText();
+        double userBalance = 0.0;
+
+        // Try to parse the balance
+        try {
+            userBalance = Double.parseDouble(sbalance); // Convert balance to double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid balance format.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if balance is invalid
+        }
+
+        // Setting up the Account object
+        Account account = new Account();
+        account.setBalance(userBalance);
+
+        // Set up the TransactionService to handle the transaction
+        TransactionService transactionService = new TransactionService();
+
+        // Get wallet ID using the mobile number
+        int walletId = transactionService.getWalletIdByMobileNumber(username);
+        if (walletId != -1) {
+            // Create PayBills payment object
+            Payment payBills = new PayBills(biller, billAmount);
+            payBills.pay(account); // Process the payment
+
+            // Save the transaction to the database
+            transactionService.saveTransaction(walletId, payBills);
+
+            // Update the wallet balance in the database (process the transaction)
+            transactionService.updateWalletBalance(walletId, account.getBalance());
+
+            // Update the UI with the new balance
+            lblBalance.setText(String.format("%.2f", account.getBalance()));
+            lblCurBal.setText(String.format("%.2f", account.getBalance()));
+
+            // Show success message
+            JOptionPane.showMessageDialog(this, "Bill payment to " + biller +
+                    " of " + String.format("%.2f", billAmount) + " was successful.",
+                    "Payment Success", JOptionPane.INFORMATION_MESSAGE);
+
+            // Optionally add the transaction to the table or perform other updates
+            String[] rowData = {
+                "Pay Bills",
+                biller,
+                String.format("%.2f", billAmount)
+            };
+            DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
+            DefaultTableModel model8 = (DefaultTableModel) jTable6.getModel();
+
+            model1.addRow(rowData);
+            model2.addRow(rowData);
+            model8.addRow(rowData);
+        } else {
+            // Handle invalid wallet ID case
+            JOptionPane.showMessageDialog(this, "No wallet associated with this user.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }                                          
 
@@ -2530,7 +2552,8 @@ public class Finals extends javax.swing.JFrame {
         try {
             amount = Double.parseDouble(amountText);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid amount.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please enter a valid amount.",
+                    "Invalid Input", JOptionPane.ERROR_MESSAGE);
             return; // Exit the method if amount is invalid
         }
         
@@ -2540,24 +2563,24 @@ public class Finals extends javax.swing.JFrame {
         try {
             balance = Double.parseDouble(sbalance); // Convert balance to double
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid balance format.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid balance format.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return; // Exit the method if balance is invalid
         }
 
         Account account = new Account();
         account.setBalance(balance);
-        
-        
         TransactionService transactionService = new TransactionService();
 
-// Get wallet ID using the mobile number
+        // Get wallet ID using the mobile number
         int receiverWalletId = transactionService.getWalletIdByMobileNumber(sNumber);
         int senderWalletId = transactionService.getWalletIdByMobileNumber(username);
-        // Proceed if wallet ID is valid (not -1)
+
         if (receiverWalletId != -1) {
-            // Create a SendMoney payment object with recipient and amount
-            
+      
             Payment sendMoney = new SendMoney(selectedUserName, amount);
+            
+            //Polymorphism (pay(account))
             sendMoney.pay(account);
             transactionService.saveTransaction(receiverWalletId, sendMoney);
             transactionService.processTransaction(senderWalletId, receiverWalletId, amount);
@@ -2566,7 +2589,26 @@ public class Finals extends javax.swing.JFrame {
             lblCurBal.setText( String.format("%.2f", account.getBalance()));
         }
 
-        JOptionPane.showMessageDialog(this, "Transaction successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Transaction successful!", 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Optionally add the transaction to the table or perform other updates
+        String[] rowData = {
+            "Send Money",             // Transaction type
+            selectedUserName,         // Recipient name (or username)
+            String.format("%.2f", amount) // Amount transferred
+        };
+
+        // Get the DefaultTableModel of your tables
+        DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel model8 = (DefaultTableModel) jTable8.getModel();
+
+        // Add the row data to each table
+        model1.addRow(rowData);
+        model2.addRow(rowData);
+        model8.addRow(rowData);
+
     }                                      
 
     private void txtSPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -2630,7 +2672,6 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JFrame frmLogin;
     private javax.swing.JFrame frmMainWindow;
     private javax.swing.JFrame frmSignUp;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton6;
