@@ -11,7 +11,7 @@ package Main;
 public class PayBills extends Payment {
 
     public PayBills(String biller, double amount) {
-        super("PayBills", biller, amount);
+        super("Out", "PayBills", biller, amount);
     }
 
     @Override
