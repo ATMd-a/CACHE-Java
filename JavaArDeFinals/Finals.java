@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class Finals extends javax.swing.JFrame {
     private Account account;
     private int walletId;
+    private User selectedUser;
     private Connection connection = null;
     
     public Finals() {
@@ -123,10 +124,11 @@ public class Finals extends javax.swing.JFrame {
         radS100 = new javax.swing.JRadioButton();
         radS500 = new javax.swing.JRadioButton();
         radS1000 = new javax.swing.JRadioButton();
-        btSNumber = new javax.swing.JTextField();
+        txtSNumber = new javax.swing.JTextField();
         btSContinue = new javax.swing.JButton();
         jLabel50 = new javax.swing.JLabel();
         cmbSelectAccount = new javax.swing.JComboBox<>();
+        lblCurBal = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         pnlDeposit = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -314,7 +316,7 @@ public class Finals extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        jPanel13.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 200, 100));
+        jPanel13.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 530, 100));
 
         jButton12.setText("Cash In");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -332,11 +334,7 @@ public class Finals extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -527,9 +525,9 @@ public class Finals extends javax.swing.JFrame {
         });
         jPanel27.add(radS1000, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
 
-        btSNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btSNumber.setName(""); // NOI18N
-        jPanel27.add(btSNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 240, 41));
+        txtSNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSNumber.setName(""); // NOI18N
+        jPanel27.add(txtSNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 240, 41));
 
         btSContinue.setBackground(new java.awt.Color(133, 198, 192));
         btSContinue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -552,6 +550,9 @@ public class Finals extends javax.swing.JFrame {
             }
         });
         jPanel27.add(cmbSelectAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 240, 40));
+
+        lblCurBal.setText("Current: ");
+        jPanel27.add(lblCurBal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 130, -1));
 
         pnlSend.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 700, 460));
 
@@ -710,6 +711,11 @@ public class Finals extends javax.swing.JFrame {
         btDContinue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btDContinue.setText("Continue");
         btDContinue.setBorderPainted(false);
+        btDContinue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDContinueActionPerformed(evt);
+            }
+        });
         jPanel11.add(btDContinue, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 193, 39));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -810,6 +816,11 @@ public class Finals extends javax.swing.JFrame {
         jPanel36.add(jLabel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 112, -1));
 
         ckbPaybills.setText("I confirm that the details are correct");
+        ckbPaybills.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ckbPaybillsActionPerformed(evt);
+            }
+        });
         jPanel36.add(ckbPaybills, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
         txtAreaBills.setColumns(20);
@@ -829,6 +840,11 @@ public class Finals extends javax.swing.JFrame {
         btBContinue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btBContinue.setText("Continue");
         btBContinue.setBorderPainted(false);
+        btBContinue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBContinueActionPerformed(evt);
+            }
+        });
         jPanel28.add(btBContinue, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 193, 39));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -869,10 +885,7 @@ public class Finals extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Type", "Method", "Receiver", "Amount"
@@ -901,10 +914,7 @@ public class Finals extends javax.swing.JFrame {
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Type", "Method", "Receiver", "Amount"
@@ -933,10 +943,7 @@ public class Finals extends javax.swing.JFrame {
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Type", "Method", "Receiver", "Amount"
@@ -965,10 +972,7 @@ public class Finals extends javax.swing.JFrame {
 
         jTable8.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Type", "Method", "Receiver", "Amount"
@@ -1831,13 +1835,64 @@ public class Finals extends javax.swing.JFrame {
     private void tbtDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtDashboardActionPerformed
         // TODO add your handling code here:
         tbMenu.setSelectedIndex(0);
-
+        
     }//GEN-LAST:event_tbtDashboardActionPerformed
 
     private void tbtSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtSendActionPerformed
         // TODO add your handling code here:
         tbMenu.setSelectedIndex(1);
+        
+        String sbalance = lblBalance.getText();
+        lblCurBal.setText("(Current Bal: " + sbalance + ")");
+    
+        String url = "jdbc:mysql://localhost:3306/ewallet";
+        String dbUser = "root";
+        String dbPass = "admin";
 
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            // Establish the connection to the database
+            connection = DriverManager.getConnection(url, dbUser, dbPass);
+
+            // SQL query to fetch all usernames
+            String query = "SELECT U_Name FROM tblAccount";
+
+            // Create PreparedStatement
+            stmt = connection.prepareStatement(query);
+
+            // Execute the query and fetch the result
+            resultSet = stmt.executeQuery();
+
+            // Clear the combo box before adding new items
+            cmbSelectAccount.removeAllItems();
+            
+
+            // Add usernames to the combo box
+            while (resultSet.next()) {
+                String userName = resultSet.getString("U_Name");
+                cmbSelectAccount.addItem(userName);
+
+               
+            }
+
+            
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            // Close resources to prevent memory leaks
+            try {
+                if (resultSet != null) resultSet.close();
+                if (stmt != null) stmt.close();
+                if (connection != null) connection.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
     }//GEN-LAST:event_tbtSendActionPerformed
 
     private void tbtDepositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtDepositActionPerformed
@@ -1885,7 +1940,7 @@ public class Finals extends javax.swing.JFrame {
         // Database connection parameters
         String url = "jdbc:mysql://localhost:3306/ewallet";
         String dbUser = "root";
-        String dbPass = "Silver.pass1";
+        String dbPass = "admin";
 
         Connection connection = null;
         PreparedStatement stmtCheckUserID = null, stmtUser = null, stmtWallet = null;
@@ -1974,18 +2029,22 @@ public class Finals extends javax.swing.JFrame {
     private void ckbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbSendActionPerformed
         // TODO add your handling code here:
         if (ckbSend.isSelected()) {
-            btSContinue.setEnabled(true);  // Enable the button
+            // Enable the button if checkbox is checked
+            btSend.setEnabled(true);
         } else {
-            btSContinue.setEnabled(false);  // Disable the button
+            // Disable the button if checkbox is unchecked
+            btSend.setEnabled(false);
         }
     }//GEN-LAST:event_ckbSendActionPerformed
 
     private void ckbDepositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbDepositActionPerformed
         // TODO add your handling code here:
-        if (ckbSend.isSelected()) {
-            btDeposit.setEnabled(true);  // Enable the button
+        if (ckbDeposit.isSelected()) {
+            // Enable the button if checkbox is checked
+            btDeposit.setEnabled(true);
         } else {
-            btDeposit.setEnabled(false);  // Disable the button
+            // Disable the button if checkbox is unchecked
+            btDeposit.setEnabled(false);
         }
     }//GEN-LAST:event_ckbDepositActionPerformed
 
@@ -2042,242 +2101,442 @@ public class Finals extends javax.swing.JFrame {
 
     private void cmbSelectAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSelectAccountActionPerformed
         // TODO add your handling code here:
-//        String url = "jdbc:mysql://localhost:3306/ewallet";
-//        String dbUser = "root";
-//        String dbPass = "Silver.pass1";
-//
-//        Connection connection = null;
-//        PreparedStatement stmt = null;
-//        ResultSet resultSet = null;
-//
-//        try {
-//            // Establish the connection to the database
-//            connection = DriverManager.getConnection(url, dbUser, dbPass);
-//
-//            // SQL query to check the user credentials
-//            String query = "Select U_Name from tblAccount;";
-//
-//            // Create PreparedStatement to avoid SQL injection
-//            stmt = connection.prepareStatement(query);
-//            stmt.setString(1, userName);
-//            
-//            // Execute the query and fetch the result
-//            resultSet = stmt.executeQuery();
-//
-//            // Check if the user exists and credentials are correct
-//            if (resultSet.next()) {
-//                //IMPORTANT
-//                //Caller
-//                User userInfo = new User();
-//                Account bal = new Account();
-//                
-//                //Encap. Info gets from database
-//                userInfo.setName(resultSet.getString("U_Name"));
-//                userInfo.setPassword(resultSet.getString("U_Password"));
-//                userInfo.setMobileNumber(resultSet.getString("U_Number"));
-//                
-//                bal.setBalance(resultSet.getDouble("W_Balance"));
-//                
-//                //info sets in a variable
-//                String username = userInfo.getName();
-//                String passWord = userInfo.getPassword();
-//                String mobileno = userInfo.getMobileNumber();
-//                
-//                double userBalance = bal.getBalance();
-//                
-//                //using the variable from encap
-//                lblName.setText(username);
-//                txtAUsername.setText(username);
-//                txtAPassword.setText(passWord);
-//                txtAMobileNo.setText(mobileno);
-//                
-//                lblBalance.setText(String.valueOf(userBalance));
-//                
-//                //frame management
-//                frmMainWindow.setVisible(true);
-//                frmLogin.dispose();
-//                this.dispose();
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Login Failed: Invalid Username or Password", "Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//        } finally {
-//            // Close resources to prevent memory leaks
-//            try {
-//                if (resultSet != null) resultSet.close();
-//                if (stmt != null) stmt.close();
-//                if (connection != null) connection.close();
-//            } catch (SQLException ex) {
-//                JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
+        String selectedUserName = (String) cmbSelectAccount.getSelectedItem();
+        if (selectedUserName != null && !selectedUserName.isEmpty()) {
+
+            // Set up database connection
+            String url = "jdbc:mysql://localhost:3306/ewallet";
+            String dbUser = "root";
+            String dbPass = "admin";
+            Connection connection = null;
+            PreparedStatement stmt = null;
+            ResultSet resultSet = null;
+
+            try {
+                // Establish the connection to the database
+                connection = DriverManager.getConnection(url, dbUser, dbPass);
+
+                // SQL query to fetch the U_Number based on the selected username
+                String query = "SELECT U_Number FROM tblAccount WHERE U_Name = ?";
+
+                // Create PreparedStatement to prevent SQL injection
+                stmt = connection.prepareStatement(query);
+                stmt.setString(1, selectedUserName);  // Set the selected username in the query
+
+                // Execute the query
+                resultSet = stmt.executeQuery();
+
+                // Check if a result is returned
+                if (resultSet.next()) {
+                    String uNumber = resultSet.getString("U_Number");
+                    txtSNumber.setText(uNumber);  // Set the U_Number in the txtNumber text field
+                } else {
+                    JOptionPane.showMessageDialog(this, "No account found for the selected username.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                // Close resources to prevent memory leaks
+                try {
+                    if (resultSet != null) resultSet.close();
+                    if (stmt != null) stmt.close();
+                    if (connection != null) connection.close();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_cmbSelectAccountActionPerformed
 
     private void btSContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSContinueActionPerformed
         // TODO add your handling code here:
-        
+        String selectedUserName = (String) cmbSelectAccount.getSelectedItem();
+
+        // Get the account number from txtSNumber
+        String sNumber = txtSNumber.getText();
+
+        // Get the amount from txtAmount
+        String amountText = txtAmount.getText();
+        double amount = 0.0;
+
+        // Try to parse the amountText to a double
+        try {
+            amount = Double.parseDouble(amountText);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if amount is invalid
+        }
+
+        // Get the balance from lblBalance and convert it to a double
+        String sbalance = lblBalance.getText(); // trim to remove any leading or trailing spaces
+        double balance = 0.0;
+
+        try {
+            balance = Double.parseDouble(sbalance); // Convert balance to double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid balance format.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if balance is invalid
+        }
+
+        // Debugging: print the values of balance and amount to verify the values
+        System.out.println("Balance: " + balance);
+        System.out.println("Amount: " + amount);
+
+        // Compare the balance with the amount entered
+        if (balance < amount) {
+            JOptionPane.showMessageDialog(null, "Insufficient Balance", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Code to print the information in the text area
+            String message = "\nName:       " + selectedUserName + 
+                 "\nMobile Number:   " + sNumber + 
+                 "\nAmount:       " + amount;
+
+            
+            
+            txtAreaSend.setText(message); // Assuming you have a JTextArea called textArea
+        }
     }//GEN-LAST:event_btSContinueActionPerformed
 
     private void btDepositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDepositActionPerformed
         // TODO add your handling code here:
-        
-        try {
-            double depositAmount = Double.parseDouble(txtAmountDepo.getText().trim());
-            if (depositAmount <= 0) {
-            JOptionPane.showMessageDialog(this, "Amount must be greater than 0.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
-            return;
+        String selectedUserName = (String) cmbSelectAccount.getSelectedItem();
+
+    if (selectedUserName != null && !selectedUserName.isEmpty()) {
+        double depositAmount = Double.parseDouble(txtAmountDepo.getText()); 
+
+        if (depositAmount > 0) {
+            String url = "jdbc:mysql://localhost:3306/ewallet";
+            String dbUser = "root";
+            String dbPass = "admin";
+            Connection connection = null;
+            PreparedStatement stmt = null;
+            ResultSet resultSet = null;
+
+            try {
+                connection = DriverManager.getConnection(url, dbUser, dbPass);
+
+                String query = "SELECT U_Number FROM tblAccount WHERE U_Name = ?";
+                stmt = connection.prepareStatement(query);
+                stmt.setString(1, selectedUserName);
+
+                resultSet = stmt.executeQuery();
+
+                if (resultSet.next()) {
+                    String uNumber = resultSet.getString("U_Number");
+
+                    Account selectedAccount = new Account(); 
+                    selectedAccount.addBalance(depositAmount);
+
+                    Deposit depositTransaction = new Deposit(depositAmount);
+                    depositTransaction.pay(selectedAccount);
+
+                    DefaultTableModel tableModel = (DefaultTableModel) jTable7.getModel();
+                    Object[] rowData = { selectedUserName, "Deposit", depositAmount, selectedAccount.getBalance() };
+                    tableModel.addRow(rowData);
+
+                    JOptionPane.showMessageDialog(this, "Deposit of " + depositAmount + " was successful.\nYour new balance is: " + selectedAccount.getBalance(), "Deposit Successful", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Update lblBalance after deposit
+                    lblBalance.setText( String.format("%.2f", selectedAccount.getBalance()));
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Account not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                try {
+                    if (resultSet != null) resultSet.close();
+                    if (stmt != null) stmt.close();
+                    if (connection != null) connection.close();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please enter a valid deposit amount.", "Invalid Amount", JOptionPane.WARNING_MESSAGE);
         }
-        
-        // Create a Deposit payment object
-        Deposit deposit = new Deposit(depositAmount);
-        
-        deposit.pay(account); 
-        
-        TransactionService transactionService = new TransactionService();
-        transactionService.saveTransaction(walletId, deposit);
-
-        JOptionPane.showMessageDialog(this, "Deposit of " + depositAmount + " successfully processed!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-        String[] rowData = {
-            deposit.getTransactionType(),
-            deposit.getRecipient(),
-            String.format("%.2f", deposit.getAmount())
-        };
-        
-        DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
-        DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
-        DefaultTableModel model7 = (DefaultTableModel) jTable7.getModel();
-        
-        model1.addRow(rowData);
-        model2.addRow(rowData);
-        model7.addRow(rowData);
-        
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Invalid input. Please enter a numeric value for the deposit amount.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select an account first.", "No Account Selected", JOptionPane.WARNING_MESSAGE);
     }
+        
         
         
     }//GEN-LAST:event_btDepositActionPerformed
 
     private void btPaybillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPaybillsActionPerformed
         // TODO add your handling code here:
-         try {
-            String biller = cmbBiller.getSelectedItem().toString();
-            double billAmount = Double.parseDouble(txtAmountBills.getText().trim());
-    
-            if (billAmount <= 0) {
-                JOptionPane.showMessageDialog(this, "Amount must be greater than 0.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-    
-            
-            if (ckbProtectFee.isSelected()) {
-                billAmount += billAmount * 0.02;
-            }
-    
-            
-            PayBills payBills = new PayBills(biller, billAmount);
-    
-            Account account = new Account();  
-    
-            payBills.pay(account);
-    
-            if (account.getBalance() >= billAmount) {
-                JOptionPane.showMessageDialog(this, "Bill payment to " + biller + " of " + String.format("%.2f", billAmount) + " was successful.", "Payment Success", JOptionPane.INFORMATION_MESSAGE);
+        try {
+        String biller = cmbBiller.getSelectedItem().toString();
+        double billAmount = Double.parseDouble(txtAmountBills.getText().trim());
+
+        if (billAmount <= 0) {
+            JOptionPane.showMessageDialog(this, "Amount must be greater than 0.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Apply protection fee if checkbox is selected
+        if (ckbProtectFee.isSelected()) {
+            billAmount += billAmount * 0.02;
+        }
+
+        // Retrieve the user's balance from the database
+        String url = "jdbc:mysql://localhost:3306/ewallet";
+        String dbUser = "root";
+        String dbPass = "admin";
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet resultSet = null;
+        double userBalance = 0;
+
+        try {
+            connection = DriverManager.getConnection(url, dbUser, dbPass);
+
+            // Replace the "01234567890" below with a dynamic value from your program
+            String query = "SELECT W_Balance FROM tblWallet WHERE U_Number = ?";
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, "01234567890"); // Replace with the actual user number
+
+            resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                userBalance = resultSet.getDouble("W_Balance");
             } else {
-                JOptionPane.showMessageDialog(this, "Insufficient balance to pay the bill.", "Payment Failed", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No wallet associated with this user.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (stmt != null) stmt.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error closing resources: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
+        // Check if the user has sufficient balance
+        if (userBalance >= billAmount) {
+            userBalance -= billAmount; 
 
-        String[] rowData = {
-            payBills.getTransactionType(),
-            payBills.getRecipient(),
-            String.format("%.2f", payBills.getAmount()) // Show the amount with two decimal places
-        };
+            // Update the user's balance in the database
+            try {
+                connection = DriverManager.getConnection(url, dbUser, dbPass);
 
-        // Update all tables with the transaction details
-        DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
-        DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
-        DefaultTableModel model8 = (DefaultTableModel) jTable8.getModel();
+                String updateQuery = "UPDATE tblWallet SET W_Balance = ?";
+                stmt = connection.prepareStatement(updateQuery);
+                stmt.setDouble(1, userBalance);
 
-        model1.addRow(rowData);
-        model2.addRow(rowData);
-        model8.addRow(rowData);
+                stmt.executeUpdate();
 
+                JOptionPane.showMessageDialog(this, "Bill payment to " + biller + " of " + String.format("%.2f", billAmount) + " was successful.", "Payment Success", JOptionPane.INFORMATION_MESSAGE);
+
+               
+                String[] rowData = {
+                    "Pay Bills",
+                    biller,
+                    String.format("%.2f", billAmount)
+                };
+
+                DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
+                DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
+                DefaultTableModel model8 = (DefaultTableModel) jTable8.getModel();
+
+                model1.addRow(rowData);
+                model2.addRow(rowData);
+                model8.addRow(rowData);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error updating balance: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                try {
+                    if (stmt != null) stmt.close();
+                    if (connection != null) connection.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Error closing resources: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            // Insufficient balance
+            JOptionPane.showMessageDialog(this, "Insufficient balance to pay the bill.", "Payment Failed", JOptionPane.ERROR_MESSAGE);
+        }
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Invalid input. Please enter a numeric value for the amount.", "Input Error", JOptionPane.ERROR_MESSAGE);
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         e.printStackTrace();
     }
-        
     }//GEN-LAST:event_btPaybillsActionPerformed
 
     private void btSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSendActionPerformed
         // TODO add your handling code here:
-        try {
-        
-        String recipient = btSNumber.getText().trim();  
-        double amountToSend = Double.parseDouble(txtAmount.getText().trim()); 
+        String recipient = txtSNumber.getText().trim();
+    double amountToSend;
+
+    try {
+        amountToSend = Double.parseDouble(txtAmount.getText().trim());
 
         if (amountToSend <= 0) {
             JOptionPane.showMessageDialog(this, "Amount must be greater than 0.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (recipient.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Recipient's mobile number cannot be empty.", "Invalid Recipient", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid amount.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-        
-        if (account == null) {
-            JOptionPane.showMessageDialog(this, "No account selected.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    // Get the selected username from the combo box
+    String selectedUserName = (String) cmbSelectAccount.getSelectedItem();
 
-        
-        SendMoney sendMoney = new SendMoney(recipient, amountToSend);
+    if (selectedUserName == null || selectedUserName.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No account selected.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-        
-        sendMoney.pay(account);
+    // Set up database connection
+    String url = "jdbc:mysql://localhost:3306/ewallet";
+    String dbUser = "root";
+    String dbPass = "admin";
+    Connection connection = null;
+    PreparedStatement stmt = null;
+    ResultSet resultSet = null;
+    Account senderAccount = null;
 
-        
-        if (account.getBalance() >= 0) {
-            JOptionPane.showMessageDialog(this, "Successfully sent " + amountToSend + " to " + recipient + ".", "Transaction Successful", JOptionPane.INFORMATION_MESSAGE);
+    try {
+        connection = DriverManager.getConnection(url, dbUser, dbPass);
+        String query = "SELECT a.U_Number, w.W_Balance FROM tblAccount a " +
+                       "JOIN tblWallet w ON a.U_Number = w.U_Number WHERE a.U_Name = ?";
+        stmt = connection.prepareStatement(query);
+        stmt.setString(1, selectedUserName); 
 
-            
-            String[] rowData = {
-                sendMoney.getTransactionType(),
-                sendMoney.getRecipient(),
-                String.format("%.2f", sendMoney.getAmount())
-            };
+        resultSet = stmt.executeQuery();
 
-            // Update the transaction history tables
-            DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
-            DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
-            DefaultTableModel model6 = (DefaultTableModel) jTable6.getModel();
-
-            model1.addRow(rowData);
-            model2.addRow(rowData);
-            model6.addRow(rowData);
+        if (resultSet.next()) {
+            String uNumber = resultSet.getString("U_Number");
+            double balance = resultSet.getDouble("W_Balance");
+            senderAccount = new Account();
+            senderAccount.setBalance(balance);
 
         } else {
-            JOptionPane.showMessageDialog(this, "Insufficient balance to send money.", "Transaction Failed", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No account found for the selected username.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Invalid input. Please enter a numeric value for the amount.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error during database connection or query execution: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    } finally {
+        try {
+            if (resultSet != null) resultSet.close();
+            if (stmt != null) stmt.close();
+            if (connection != null) connection.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error closing resources: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Call SendMoney object and deduct balance
+    SendMoney sendMoney = new SendMoney(recipient, amountToSend);
+    sendMoney.pay(senderAccount);
+
+    if (senderAccount.getBalance() >= 0) {
+        JOptionPane.showMessageDialog(this, "Successfully sent " + amountToSend + " to " + recipient, "Transaction Successful", JOptionPane.INFORMATION_MESSAGE);
+
+        // Update lblBalance after sending money
+        lblBalance.setText(String.format("%.2f", senderAccount.getBalance()));
+
+        // Update transaction history tables
+        String[] rowData = { sendMoney.getTransactionType(), sendMoney.getRecipient(), String.format("%.2f", sendMoney.getAmount()) };
+        DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
+        model1.addRow(rowData);
+
+    } else {
+        JOptionPane.showMessageDialog(this, "Insufficient balance to send money.", "Transaction Failed", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btSendActionPerformed
+
+    private void btDContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDContinueActionPerformed
+        // TODO add your handling code here:
+         String selectedUserName = (String) cmbPartnerOutlet.getSelectedItem();
+
+        // Get the amount from txtAmount
+        String amountText = txtAmountDepo.getText();
+        double amount = 0.0;
+
+        // Try to parse the amountText to a double
+        try {
+            amount = Double.parseDouble(amountText);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if amount is invalid
+        }
+
+        String message = "Selected User: \t\t" + selectedUserName +
+                "\nAmount: \t\t" + amount;
+            
+            
+            txtAreaDeposit.setText(message);
+    }//GEN-LAST:event_btDContinueActionPerformed
+
+    private void btBContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBContinueActionPerformed
+        // TODO add your handling code here:
+        String bill = (String) cmbBills.getSelectedItem();
+        String biller = (String) cmbBiller.getSelectedItem();
+
+        // Get the account number from txtSNumber
+        String ANumber = txtAccountNo.getText();
+
+        // Get the amount from txtAmount
+        String amountText = txtAmountBills.getText();
+        double amount = 0.0;
+
+        // Try to parse the amountText to a double
+        try {
+            amount = Double.parseDouble(amountText);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if amount is invalid
+        }
+
+        // Get the balance from lblBalance and convert it to a double
+        String sbalance = lblBalance.getText(); // trim to remove any leading or trailing spaces
+        double balance = 0.0;
+
+        try {
+            balance = Double.parseDouble(sbalance); // Convert balance to double
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid balance format.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if balance is invalid
+        }
+
+        // Compare the balance with the amount entered
+        if (balance < amount) {
+            JOptionPane.showMessageDialog(null, "Insufficient Balance", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Code to print the information in the text area
+            String message = "Categories: \t\t" + bill +
+                    "Biller: \t\t" + biller +
+                    "\nAccount Number: \t\t" + ANumber + 
+                    "\nAmount: \t\t" + amount;
+            
+            
+            txtAreaBills.setText(message); // Assuming you have a JTextArea called textArea
+        }
+    }//GEN-LAST:event_btBContinueActionPerformed
+
+    private void ckbPaybillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbPaybillsActionPerformed
+        // TODO add your handling code here:
+        if (ckbPaybills.isSelected()) {
+            // Enable the button if checkbox is checked
+            btPaybills.setEnabled(true);
+        } else {
+            // Disable the button if checkbox is unchecked
+            btPaybills.setEnabled(false);
+        }
+    }//GEN-LAST:event_ckbPaybillsActionPerformed
    
     /**
      * @param args the command line arguments
@@ -2318,7 +2577,6 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JButton btLogin;
     private javax.swing.JButton btPaybills;
     private javax.swing.JButton btSContinue;
-    private javax.swing.JTextField btSNumber;
     private javax.swing.JButton btSSignup;
     private javax.swing.JButton btSend;
     private javax.swing.JButton btSignUp;
@@ -2446,6 +2704,7 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     private javax.swing.JLabel lblBalance;
+    private javax.swing.JLabel lblCurBal;
     private javax.swing.JLabel lblName;
     private javax.swing.JPanel pnlAccount;
     private javax.swing.JPanel pnlBills;
@@ -2488,6 +2747,7 @@ public class Finals extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtLPassword;
     private javax.swing.JTextField txtLUsername;
     private javax.swing.JTextField txtSMobileNumber;
+    private javax.swing.JTextField txtSNumber;
     private javax.swing.JPasswordField txtSPassword;
     private javax.swing.JTextField txtSUsername;
     // End of variables declaration//GEN-END:variables

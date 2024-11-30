@@ -14,6 +14,7 @@ public class User {
     private String password;
     private String mobileNumber;
     private Account account;
+    
     // Getter and Setter for Name
     public String getName() {
         return name;
@@ -41,12 +42,13 @@ public class User {
         this.mobileNumber = mobileNumber;
     }
     
-    public Account getAccount() {
+     public Account getAccount() {
         return account;
     }
 
     public void setAccount(Account account) {
         this.account = account;
     }
+    
 }
 
