@@ -9,6 +9,8 @@ package Main;
  * @author althea
  */
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionService {
 
@@ -32,6 +34,31 @@ public class TransactionService {
             System.out.println("Failed to save the transaction.");
         }
     }
+    
+    public List<String[]> getTransactionsByWalletId(int walletId) {
+        List<String[]> transactions = new ArrayList<>();
+        String query = "SELECT T_Type, T_Method, T_Recipient, T_Balance FROM tblTransaction WHERE W_ID = ?";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ewallet", "root", "Silver.pass1");
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+
+            stmt.setInt(1, walletId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String type = rs.getString("T_Type");
+                String method = rs.getString("T_Method");
+                String recipient = rs.getString("T_Recipient");
+                double balance = rs.getDouble("T_Balance");
+                transactions.add(new String[]{type, method, recipient, String.format("%.2f", balance)});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return transactions;
+    }
+
     
     public int getWalletIdByMobileNumber(String userMobileNumber) {
         int walletId = -1;  // Default to -1 if no wallet found
