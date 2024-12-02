@@ -1,0 +1,28 @@
+package Main;
+
+public class Account {
+    private double balance;
+    
+    public double getBalance() {
+        return balance; 
+    }
+    public void setBalance(double balance) {
+        this.balance = balance; 
+    }
+    
+    public void addBalance(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        } else {
+            System.out.println("Amount to add must be positive.");
+        }
+    }
+
+    public void deductBalance(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient balance or invalid amount.");
+        }
+    }
+}
