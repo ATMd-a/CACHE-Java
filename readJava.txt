@@ -1,6 +1,0 @@
-changes: 
-//btDeposit, btPaybills, btSend, User
-
-global: 
-//Private Acount account; Private int walletId;
-
